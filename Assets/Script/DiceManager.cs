@@ -8,6 +8,7 @@ public class DiceManager : MonoBehaviour
     public List<Image> dices;// DS SpriteRenderer của xúc xắc
     [SerializeField] private Sprite[] spr; //DS 6 mặt xúc xắc
     private int[] diceValues;
+    public GameObject Lid;
     void Start()
     {
         diceValues = new int[dices.Count];
@@ -25,13 +26,16 @@ public class DiceManager : MonoBehaviour
         while (true) // lặp vĩnh viễn
         {
             yield return StartCoroutine(PlayRound()); // Gọi vòng roll
-            yield return new WaitForSeconds(1f); // nghỉ 1 giây rồi roll tiếp
+            yield return new WaitForSeconds(7f); // nghỉ 1 giây rồi roll tiếp
         }
     }
 
-    private IEnumerator PlayRound()
+    private IEnumerator PlayRound() 
     {
-        yield return new WaitForSeconds(3f);
+        Lid.SetActive(true);
+
+        yield return new WaitForSeconds(4f);
+        Lid.SetActive(false);
         for (int i = 0; i < dices.Count; i++)
         {
             int random = Random.Range(1, spr.Length);
